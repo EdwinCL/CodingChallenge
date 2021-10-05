@@ -1,7 +1,14 @@
+import java.io.IOException;
+import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -9,17 +16,27 @@ import javafx.stage.Stage;
  */
 public class CodingChallenge extends Application {
 
+    @FXML
+    Button closeButton;
+
     @Override
     public void start(Stage stage) {
-        Label helloLabel = new Label("Hello, JavaFX");
+        URL location = getClass().getResource("fxml/CodingChallenge.fxml");
+        Locale locale = new Locale("en", "US");
+        ResourceBundle resources = ResourceBundle.getBundle("MyBundle", locale);
+        FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
+        fxmlLoader.setController(this);
+        try {
+            Pane root = (Pane)fxmlLoader.load();
+            Scene scene = new Scene(root, 640, 480);
+            stage.setScene(scene);
+            stage.show();
 
-        StackPane root = new StackPane();
-        root.getChildren().add(helloLabel);
-        
-        Scene scene = new Scene(root, 300, 250);
-        stage.setScene(scene);
-        stage.show();        
-    } // end start
+            closeButton.setOnAction(event -> stage.close());
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        } // end try
+    } // end method start
 
     public static void main(String[] args) {
         launch();
