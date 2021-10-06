@@ -1,8 +1,7 @@
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.stream.IntStream;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,14 +36,11 @@ public class FizzBuzzController implements Initializable {
     @FXML
     private Button calculateButton;
 
-    // Default values for divisors and keywords
-    private int divisor1 = 3;
-    private int divisor2 = 5;
-    private String keyword1 = "fizz";
-    private String keyword2 = "buzz";
+    private FizzBuzzModel model = new FizzBuzzModel();
 
     private final static String NON_NEGATIVE_INTEGER = "[0-9]*";
-    private final static String POSITIVE_INTEGER = "[1-9]*";
+    private final static String outputDelimiter = "     ";
+    private final static Logger LOGGER = Logger.getLogger(FizzBuzzController.class.getName());
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,34 +54,44 @@ public class FizzBuzzController implements Initializable {
         }));
         divisor1TextField.setTextFormatter(new TextFormatter<>(change -> {
             String text = change.getText();
-            if (text.matches(POSITIVE_INTEGER)) {
+            if (text.matches(NON_NEGATIVE_INTEGER)) {
                 return change;
             } // end if
             return null;
         }));
+        divisor1TextField.textProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue.equals("0")) {
+                divisor1TextField.setText(oldValue);
+            } // end if
+        });
         divisor2TextField.setTextFormatter(new TextFormatter<>(change -> {
             String text = change.getText();
-            if (text.matches(POSITIVE_INTEGER)) {
+            if (text.matches(NON_NEGATIVE_INTEGER)) {
                 return change;
             } // end if
             return null;
         }));
+        divisor2TextField.textProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue.equals("0")) {
+                divisor2TextField.setText(oldValue);
+            } // end if
+        });
 
         // When input changes, compute the output
         inputTextField.textProperty().addListener((observer, oldValue, newValue) -> refreshOutput(newValue));
 
         // Initialize with default values
-        divisor1TextField.setText(String.valueOf(divisor1));
-        keyword1TextField.setText(keyword1);
-        divisor2TextField.setText(String.valueOf(divisor2));
-        keyword2TextField.setText(keyword2);
+        divisor1TextField.setText(String.valueOf(model.getDivisor1()));
+        keyword1TextField.setText(model.getKeyword1());
+        divisor2TextField.setText(String.valueOf(model.getDivisor2()));
+        keyword2TextField.setText(model.getKeyword2());
 
         // Compute the output when the "Calculate" button clicked
         calculateButton.setOnAction(event -> {
-            divisor1 = Integer.valueOf(divisor1TextField.getText());
-            keyword1 = keyword1TextField.getText();
-            divisor2 = Integer.valueOf(divisor2TextField.getText());
-            keyword2 = keyword2TextField.getText();
+            model.setDivisor1(Integer.valueOf(divisor1TextField.getText()));
+            model.setKeyword1(keyword1TextField.getText());
+            model.setDivisor2(Integer.valueOf(divisor2TextField.getText()));
+            model.setKeyword2(keyword2TextField.getText());
             refreshOutput(inputTextField.getText());
         });
     } // end method initialize
@@ -98,30 +104,14 @@ public class FizzBuzzController implements Initializable {
         outputListView.getItems().clear();
         if (null != upperBoundString && !upperBoundString.isEmpty()) {
             try {
-                outputListView.getItems().addAll(computeOutput(Integer.valueOf(upperBoundString)));
+                Map<Integer, String> outputMap = model.computeOutput(Integer.valueOf(upperBoundString));
+                outputMap.forEach((k, v) -> {
+                    outputListView.getItems().add(String.valueOf(k) + outputDelimiter + v);
+                });
             } catch (NumberFormatException e) {
+                LOGGER.warning(e.getMessage());
             } // end try
         } // end if
     } // end method refreshOutput
-
-    /**
-     * Compute the output up to the given upperBound using the pre-defined divisors and output words.
-     * @param upperBound the upper bound
-     * @return the computed string list, or an empty list if the upper bound is less than 0
-     */
-    private List<String> computeOutput(final int upperBound) {
-        List<String> answerList = new ArrayList<>();
-        if (upperBound >= 0) {
-            IntStream intStream = IntStream.rangeClosed(0, upperBound);
-            intStream.forEach(value -> {
-                StringBuilder stringBuilder = new StringBuilder(String.valueOf(value));
-                stringBuilder.append("\t");
-                if (value % divisor1 == 0) stringBuilder.append(keyword1);
-                if (value % divisor2 == 0) stringBuilder.append(keyword2);
-                answerList.add(stringBuilder.toString());
-            });
-        } // end if
-        return answerList;
-    } // end method computOutput
     
 } // end class FizzBuzz
