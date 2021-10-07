@@ -2,6 +2,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+/**
+ * Model class for generating "fizzbuzz"
+ */
 public class FizzBuzzModel {
 
     // Default values for divisors and keywords
@@ -9,7 +12,7 @@ public class FizzBuzzModel {
     private int divisor2 = 5;
     private String keyword1 = "fizz";
     private String keyword2 = "buzz";
-    
+
     public FizzBuzzModel() {
     } // end constructor
 
@@ -62,5 +65,5 @@ public class FizzBuzzModel {
             });
         } // end if
         return answerMap;
-    } // end method computOutput    
+    } // end method computOutput
 }

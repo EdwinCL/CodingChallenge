@@ -34,14 +34,14 @@ public class FizzBuzzController implements Initializable {
     private TextField keyword2TextField;
 
     @FXML
-    private Button calculateButton;
+    private Button refreshButton;
 
     private FizzBuzzModel model = new FizzBuzzModel();
 
     private final static String NON_NEGATIVE_INTEGER = "[0-9]*";
     private final static String outputDelimiter = "     ";
     private final static Logger LOGGER = Logger.getLogger(FizzBuzzController.class.getName());
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set the input and divisors TextField to allow integer only
@@ -86,8 +86,8 @@ public class FizzBuzzController implements Initializable {
         divisor2TextField.setText(String.valueOf(model.getDivisor2()));
         keyword2TextField.setText(model.getKeyword2());
 
-        // Compute the output when the "Calculate" button clicked
-        calculateButton.setOnAction(event -> {
+        // Refresh the output using the "Options" values when the "Refresh" button clicked
+        refreshButton.setOnAction(event -> {
             model.setDivisor1(Integer.valueOf(divisor1TextField.getText()));
             model.setKeyword1(keyword1TextField.getText());
             model.setDivisor2(Integer.valueOf(divisor2TextField.getText()));
@@ -113,5 +113,5 @@ public class FizzBuzzController implements Initializable {
             } // end try
         } // end if
     } // end method refreshOutput
-    
+
 } // end class FizzBuzz
