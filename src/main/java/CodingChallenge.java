@@ -7,7 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -17,7 +17,13 @@ import javafx.stage.Stage;
 public class CodingChallenge extends Application {
 
     @FXML
-    Button closeButton;
+    private FizzBuzzController fizzBuzzController;
+
+    @FXML
+    private FibonacciSequenceController fibonacciSequenceController;
+
+    @FXML
+    private ListView<String> outputListView;
 
     @Override
     public void start(Stage stage) {
@@ -28,11 +34,12 @@ public class CodingChallenge extends Application {
         fxmlLoader.setController(this);
         try {
             Pane root = (Pane)fxmlLoader.load();
-            Scene scene = new Scene(root, 640, 480);
+            Scene scene = new Scene(root, 600, 600);
             stage.setScene(scene);
             stage.show();
 
-            closeButton.setOnAction(event -> stage.close());
+            fizzBuzzController.setOutputListView(outputListView);
+            fibonacciSequenceController.setOutputListView(outputListView);
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         } // end try

@@ -16,19 +16,18 @@ import javafx.scene.control.TextFormatter;
 public class FibonacciSequenceController implements Initializable {
 
     @FXML
-    TextField xTextField;
+    private TextField xTextField;
 
     @FXML
-    ListView<String> outputListView;
+    private TextField yTextField;
 
     @FXML
-    TextField yTextField;
+    private TextField zTextField;
 
     @FXML
-    TextField zTextField;
+    private Button generateButton;
 
-    @FXML
-    Button refreshButton;
+    private ListView<String> outputListView;
 
     private FibonacciSequenceModel model = new FibonacciSequenceModel();
 
@@ -67,12 +66,20 @@ public class FibonacciSequenceController implements Initializable {
         zTextField.setText(String.valueOf(model.getZValue()));
 
         // Refresh the output using the "Options" values when the "Refresh" button clicked
-        refreshButton.setOnAction(event -> {
+        generateButton.setOnAction(event -> {
             model.setYValue(yTextField.getText());
             model.setZValue(zTextField.getText());
             refreshOutput(xTextField.getText());
         });
     } // end method initialize
+
+    /**
+     *
+     * @param outputListView
+     */
+    public void setOutputListView(ListView<String> outputListView) {
+        this.outputListView = outputListView;
+    } // end constructor
 
     /**
      *

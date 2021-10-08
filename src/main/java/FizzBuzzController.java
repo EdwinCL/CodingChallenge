@@ -19,9 +19,6 @@ public class FizzBuzzController implements Initializable {
     private TextField inputTextField;
 
     @FXML
-    private ListView<String> outputListView;
-
-    @FXML
     private TextField divisor1TextField;
 
     @FXML
@@ -34,7 +31,9 @@ public class FizzBuzzController implements Initializable {
     private TextField keyword2TextField;
 
     @FXML
-    private Button refreshButton;
+    private Button generateButton;
+
+    private ListView<String> outputListView;
 
     private FizzBuzzModel model = new FizzBuzzModel();
 
@@ -87,7 +86,7 @@ public class FizzBuzzController implements Initializable {
         keyword2TextField.setText(model.getKeyword2());
 
         // Refresh the output using the "Options" values when the "Refresh" button clicked
-        refreshButton.setOnAction(event -> {
+        generateButton.setOnAction(event -> {
             model.setDivisor1(Integer.valueOf(divisor1TextField.getText()));
             model.setKeyword1(keyword1TextField.getText());
             model.setDivisor2(Integer.valueOf(divisor2TextField.getText()));
@@ -95,6 +94,14 @@ public class FizzBuzzController implements Initializable {
             refreshOutput(inputTextField.getText());
         });
     } // end method initialize
+
+    /**
+     *
+     * @param outputListView
+     */
+    public void setOutputListView(ListView<String> outputListView) {
+        this.outputListView = outputListView;
+    } // end constructor
 
     /**
      * Refresh the output list by calculating the output up to the given upper bound.
