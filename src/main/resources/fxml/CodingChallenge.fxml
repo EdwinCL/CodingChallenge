@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane minHeight="600.0" minWidth="700.0" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="600.0" minWidth="700.0" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CodingChallengeController">
    <children>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -22,7 +22,7 @@
          <children>
             <fx:include fx:id="fizzBuzz" source="FizzBuzzPane.fxml" />
             <fx:include fx:id="fibonacciSequence" source="FibonacciSequencePane.fxml" GridPane.rowIndex="1" />
-            <fx:include source="CombineTheTwoPane.fxml" GridPane.rowIndex="2" />
+            <fx:include fx:id="combineTheTwo" source="CombineTheTwoPane.fxml" GridPane.rowIndex="2" />
             <TitledPane animated="false" collapsible="false" minHeight="600.0" text="Output" GridPane.columnIndex="1" GridPane.rowSpan="2147483647" GridPane.valignment="TOP">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

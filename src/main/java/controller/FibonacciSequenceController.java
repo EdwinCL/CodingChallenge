@@ -1,4 +1,8 @@
+package controller;
+
+import java.math.BigInteger;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -6,14 +10,14 @@ import java.util.stream.Collectors;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import model.FibonacciSequenceModel;
 
 /**
  * Controller class for displaying a customizable fibonacci sequence, F(x) = F(x - y) + F(x - z)
  */
-public class FibonacciSequenceController implements Initializable {
+public class FibonacciSequenceController extends SubController implements Initializable {
 
     @FXML
     private TextField xTextField;
@@ -26,8 +30,6 @@ public class FibonacciSequenceController implements Initializable {
 
     @FXML
     private Button generateButton;
-
-    private ListView<String> outputListView;
 
     private FibonacciSequenceModel model = new FibonacciSequenceModel();
 
@@ -58,39 +60,32 @@ public class FibonacciSequenceController implements Initializable {
             return null;
         }));
 
-        // When x input changes, compute the output
-        xTextField.textProperty().addListener((observer, oldValue, newValue) -> refreshOutput(newValue));
-
-        //
+        // Initializes the y and z value
         yTextField.setText(String.valueOf(model.getYValue()));
         zTextField.setText(String.valueOf(model.getZValue()));
 
-        // Refresh the output using the "Options" values when the "Refresh" button clicked
+        // Generates the output using all values when the "Generate" button clicked
         generateButton.setOnAction(event -> {
-            model.setYValue(yTextField.getText());
-            model.setZValue(zTextField.getText());
-            refreshOutput(xTextField.getText());
+            outputListView.getItems().clear();
+            outputListView.getItems().addAll(generateSequence().stream().map(String::valueOf).collect(Collectors.toList()));
         });
     } // end method initialize
 
     /**
-     *
-     * @param outputListView
+     * Generates the Fibonacci Sequence using x, y, z from the UI
+     * @return a list of numbers contains the Fibonacci Sequence
      */
-    public void setOutputListView(ListView<String> outputListView) {
-        this.outputListView = outputListView;
-    } // end constructor
+    public List<BigInteger> generateSequence() {
+        List<BigInteger> sequence = new ArrayList<>();
 
-    /**
-     *
-     * @param xValue
-     */
-    private void refreshOutput(final String xValue) {
-        outputListView.getItems().clear();
+        model.setYValue(yTextField.getText());
+        model.setZValue(zTextField.getText());
+        String xValue = xTextField.getText();
         if (null != xValue && !xValue.isEmpty()) {
-            List<Integer> sequence = model.generateSequence(Integer.valueOf(xValue));
-            outputListView.getItems().addAll(sequence.stream().map(String::valueOf).collect(Collectors.toList()));
+            sequence = model.generateSequence(Integer.valueOf(xValue));
         } // end if
-    } // end method refreshOutput
+
+        return sequence;
+    } // end method generateSequence
 
 } //  end class FibonacciSequenceController

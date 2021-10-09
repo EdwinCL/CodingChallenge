@@ -1,4 +1,9 @@
+package controller;
+
+import java.math.BigInteger;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -6,14 +11,14 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import model.FizzBuzzModel;
 
 /**
  * FizzBuzz controller class
  */
-public class FizzBuzzController implements Initializable {
+public class FizzBuzzController extends SubController implements Initializable {
 
     @FXML
     private TextField inputTextField;
@@ -32,8 +37,6 @@ public class FizzBuzzController implements Initializable {
 
     @FXML
     private Button generateButton;
-
-    private ListView<String> outputListView;
 
     private FizzBuzzModel model = new FizzBuzzModel();
 
@@ -76,49 +79,47 @@ public class FizzBuzzController implements Initializable {
             } // end if
         });
 
-        // When input changes, compute the output
-        inputTextField.textProperty().addListener((observer, oldValue, newValue) -> refreshOutput(newValue));
-
         // Initialize with default values
         divisor1TextField.setText(String.valueOf(model.getDivisor1()));
         keyword1TextField.setText(model.getKeyword1());
         divisor2TextField.setText(String.valueOf(model.getDivisor2()));
         keyword2TextField.setText(model.getKeyword2());
 
-        // Refresh the output using the "Options" values when the "Refresh" button clicked
+        // Generates the output using all values when the "Generate" button clicked
         generateButton.setOnAction(event -> {
-            model.setDivisor1(Integer.valueOf(divisor1TextField.getText()));
-            model.setKeyword1(keyword1TextField.getText());
-            model.setDivisor2(Integer.valueOf(divisor2TextField.getText()));
-            model.setKeyword2(keyword2TextField.getText());
-            refreshOutput(inputTextField.getText());
+            outputListView.getItems().clear();
+            generateSequence().forEach((k, v) -> {
+                outputListView.getItems().add(String.valueOf(k) + outputDelimiter + v);
+            });
         });
     } // end method initialize
 
     /**
      *
-     * @param outputListView
+     * @return
      */
-    public void setOutputListView(ListView<String> outputListView) {
-        this.outputListView = outputListView;
-    } // end constructor
+    public Map<Integer, String> generateSequence() {
+        Map<Integer, String> sequence = new HashMap<>();
+
+        model.setDivisor1(divisor1TextField.getText());
+        model.setKeyword1(keyword1TextField.getText());
+        model.setDivisor2(divisor2TextField.getText());
+        model.setKeyword2(keyword2TextField.getText());
+        String upperBound = inputTextField.getText();
+        if (null != upperBound && !upperBound.isEmpty()) {
+            sequence = model.computeOutput(Integer.valueOf(upperBound));
+        } // end if
+
+        return sequence;
+    } // end method generateSequence
 
     /**
-     * Refresh the output list by calculating the output up to the given upper bound.
-     * @param upperBoundString the upper bound
+     *
+     * @param sequence
+     * @return
      */
-    private void refreshOutput(final String upperBoundString) {
-        outputListView.getItems().clear();
-        if (null != upperBoundString && !upperBoundString.isEmpty()) {
-            try {
-                Map<Integer, String> outputMap = model.computeOutput(Integer.valueOf(upperBoundString));
-                outputMap.forEach((k, v) -> {
-                    outputListView.getItems().add(String.valueOf(k) + outputDelimiter + v);
-                });
-            } catch (NumberFormatException e) {
-                LOGGER.warning(e.getMessage());
-            } // end try
-        } // end if
-    } // end method refreshOutput
+    public List<String> substituteWithKeywords(List<BigInteger> sequence) {
+        return model.substituteWithKeywords(sequence);
+    } // end method substituteWithKeywords
 
 } // end class FizzBuzz

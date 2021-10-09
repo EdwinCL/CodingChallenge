@@ -1,3 +1,6 @@
+package model;
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -9,6 +12,7 @@ public class FibonacciSequenceModel {
 
     private final static int Y_DEFAULT_VALUE = 1;
     private final static int Z_DEFAULT_VALUE = 2;
+
     private int yValue = Y_DEFAULT_VALUE;
     private int zValue = Z_DEFAULT_VALUE;
 
@@ -50,14 +54,15 @@ public class FibonacciSequenceModel {
     } // end method setZValue
 
     /**
-     *
+     * Generates fibonacci sequence
      * @param xValue
      * @return
      */
-    public List<Integer> generateSequence(final int xValue) {
-        List<Integer> sequence = new ArrayList<>();
+    public List<BigInteger> generateSequence(final int xValue) {
+        List<BigInteger> sequence = new ArrayList<>();
+        // TODO: need a more efficient way to generate the fibonacci sequence
         for (int i = 1; i <= xValue; i++) {
-            sequence.add(fibonacci(i));
+            sequence.add(BigInteger.valueOf(fibonacci(i)));
         } // end for
         return sequence;
     } // end method generateSequence
@@ -67,7 +72,7 @@ public class FibonacciSequenceModel {
      * @param n
      * @return
      */
-    public int fibonacci(int n) {
+    public long fibonacci(int n) {
         if (n == 0) return 0;
         if (n == 1 || n == 2 || n < 0) return 1;
         return fibonacci(n - yValue) + fibonacci(n - zValue);

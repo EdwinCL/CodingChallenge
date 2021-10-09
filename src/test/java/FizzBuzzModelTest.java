@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+import model.FizzBuzzModel;
+
 public class FizzBuzzModelTest {
 
     private final FizzBuzzModel cut = new FizzBuzzModel();
@@ -29,6 +31,6 @@ public class FizzBuzzModelTest {
             assertEquals(i, key.intValue());
             i++;
         } // end for
-    } // end method testOutputNumbers    
+    } // end method testOutputNumbers
 
 } // end class FizzBuzzModelTest
