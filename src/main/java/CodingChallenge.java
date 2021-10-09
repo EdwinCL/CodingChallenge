@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * Application class for the Coding Challenge
+ * Application class for the Coding Challenge app.
  */
 public class CodingChallenge extends Application {
 
@@ -22,8 +22,11 @@ public class CodingChallenge extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
         try {
             Pane root = (Pane)fxmlLoader.load();
-            Scene scene = new Scene(root, 600, 600);
+            Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setMinWidth(600);
+            stage.setMinHeight(628);
+            stage.setMaxHeight(628);
             stage.show();
         } catch (IOException exception) {
             throw new RuntimeException(exception);

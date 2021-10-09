@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 /**
- *
+ * The controller class to generate a list using inputs from the Fizz Buzz and Fibonacci Sequence programs.
  */
 public class CombineTheTwoController extends SubController implements Initializable {
 
@@ -25,8 +25,8 @@ public class CombineTheTwoController extends SubController implements Initializa
     } // end method initialize
 
     /**
-     *
-     * @return
+     * Generates a Fibonacci Sequence with matched numbers replaced with keywords from the Fizz Buzz program.
+     * @return a list of string with matched numbers replaced with Fizz Buzz program keywords
      */
     public List<String> generateOutput() {
         return parentController.substituteWithKeywords(parentController.generateFibonacciSequence());

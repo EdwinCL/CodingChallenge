@@ -9,6 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 
+/**
+ * The main controller for the Coding Challenge app.
+ */
 public class CodingChallengeController implements Initializable {
 
     @FXML
@@ -36,17 +39,17 @@ public class CodingChallengeController implements Initializable {
     } // end method initialize
 
     /**
-     *
-     * @return
+     * Generates a Fibonacci Sequence using existing values.
+     * @return a list of numbers contains the Fibonacci Sequence
      */
     public List<BigInteger> generateFibonacciSequence() {
         return fibonacciSequenceController.generateSequence();
     } // end method generateFibonacciSequence
 
     /**
-     *
-     * @param sequence
-     * @return
+     * Substitutes the given sequence with keywords from Fizz Buzz program.
+     * @param sequence input sequence
+     * @return a list of string with matched numbers replaced with Fizz Buzz program keywords
      */
     public List<String> substituteWithKeywords(List<BigInteger> sequence) {
         return fizzBuzzController.substituteWithKeywords(sequence);

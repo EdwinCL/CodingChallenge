@@ -27,16 +27,16 @@ public class FizzBuzzModel {
     private final static Logger LOGGER = Logger.getLogger(FizzBuzzModel.class.getName());
 
     /**
-     *
-     * @return
+     * Returns the divisor #1.
+     * @return the divisor
      */
     public int getDivisor1() {
         return divisor1;
     } // end method getDivisor1
 
     /**
-     *
-     * @param divisor
+     * Sets the value of divisor #1. If the given string is empty, the default value, 3, will be used.
+     * @param divisor the divsior
      */
     public void setDivisor1(final String divisor) {
         if (divisor.isEmpty()) {
@@ -51,15 +51,15 @@ public class FizzBuzzModel {
     } // end method setDivisor1
 
     /**
-     *
-     * @return
+     * Returns the divisor #2.
+     * @return the divisor
      */
     public int getDivisor2() {
         return divisor2;
     } // end method getDivisor2
 
     /**
-     *
+     * Sets the value of divisor #2. If the given string is empty, the default value, 5, will be used.
      * @param divisor
      */
     public void setDivisor2(final String divisor) {
@@ -75,32 +75,32 @@ public class FizzBuzzModel {
     } // end method setDivisor2
 
     /**
-     *
-     * @return
+     * Returns the keyword #1.
+     * @return the keyword
      */
     public String getKeyword1() {
         return keyword1;
     } // end method getKeyword1
 
     /**
-     *
-     * @param keyword
+     * Sets the keyword #1. If the given string is empty, the default value, "fizz", will be used.
+     * @param keyword the keyword
      */
     public void setKeyword1(final String keyword) {
         keyword1 = keyword.isEmpty() ? KEYWORD_1_DEFAULT : keyword;
     } // end method setKeyword1
 
     /**
-     *
-     * @return
+     * Returns the keyword #2.
+     * @return the keyword
      */
     public String getKeyword2() {
         return keyword2;
     } // end method keyword2
 
     /**
-     *
-     * @param keyword
+     * Sets the keyword #2. If the given string is empty, the default value, "buzz", will be used.
+     * @param keyword the keyword
      */
     public void setKeyword2(final String keyword) {
         keyword2 = keyword.isEmpty() ? KEYWORD_2_DEFAULT : keyword;
@@ -126,12 +126,12 @@ public class FizzBuzzModel {
     } // end method computOutput
 
     /**
-     *
-     * @param inputSequence
-     * @return
+     * Substitutes the given sequence with keywords if the number matches one of the divisors.
+     * @param sequence a list of numbers
+     * @return a list of string with matched numbers replaced with keywords
      */
-    public List<String> substituteWithKeywords(List<BigInteger> inputSequence) {
-        return inputSequence.stream().map(value -> {
+    public List<String> substituteWithKeywords(List<BigInteger> sequence) {
+        return sequence.stream().map(value -> {
             if (value.longValue() == divisor1) {
                 return keyword1;
             } else if (value.longValue() == divisor2) {

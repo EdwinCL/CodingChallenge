@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +15,7 @@ import javafx.scene.control.TextFormatter;
 import model.FizzBuzzModel;
 
 /**
- * FizzBuzz controller class
+ * The controller class to display a sequence with keywords.
  */
 public class FizzBuzzController extends SubController implements Initializable {
 
@@ -42,7 +41,6 @@ public class FizzBuzzController extends SubController implements Initializable {
 
     private final static String NON_NEGATIVE_INTEGER = "[0-9]*";
     private final static String outputDelimiter = "     ";
-    private final static Logger LOGGER = Logger.getLogger(FizzBuzzController.class.getName());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,6 +52,8 @@ public class FizzBuzzController extends SubController implements Initializable {
             } // end if
             return null;
         }));
+
+        // Divisor 1
         divisor1TextField.setTextFormatter(new TextFormatter<>(change -> {
             String text = change.getText();
             if (text.matches(NON_NEGATIVE_INTEGER)) {
@@ -66,6 +66,22 @@ public class FizzBuzzController extends SubController implements Initializable {
                 divisor1TextField.setText(oldValue);
             } // end if
         });
+        divisor1TextField.focusedProperty().addListener((observer, oldValue, newValue) -> {
+            // When the textfield lost focus, update the corresponding value in the model
+            if (!newValue) {
+                model.setDivisor1(divisor1TextField.getText());
+            } // end if
+        });
+
+        // Keyword 1
+        keyword1TextField.focusedProperty().addListener((observer, oldValue, newValue) -> {
+            // When the textfield lost focus, update the corresponding value in the model
+            if (!newValue) {
+                model.setKeyword1(keyword1TextField.getText());
+            } // end if
+        });
+
+        // Divisor 2
         divisor2TextField.setTextFormatter(new TextFormatter<>(change -> {
             String text = change.getText();
             if (text.matches(NON_NEGATIVE_INTEGER)) {
@@ -76,6 +92,20 @@ public class FizzBuzzController extends SubController implements Initializable {
         divisor2TextField.textProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("0")) {
                 divisor2TextField.setText(oldValue);
+            } // end if
+        });
+        divisor2TextField.focusedProperty().addListener((observer, oldValue, newValue) -> {
+            // When the textfield lost focus, update the corresponding value in the model
+            if (!newValue) {
+                model.setDivisor2(divisor2TextField.getText());
+            } // end if
+        });
+
+        // Keyword 2
+        keyword2TextField.focusedProperty().addListener((observer, oldValue, newValue) -> {
+            // When the textfield lost focus, update the corresponding value in the model
+            if (!newValue) {
+                model.setKeyword2(keyword2TextField.getText());
             } // end if
         });
 
@@ -95,16 +125,12 @@ public class FizzBuzzController extends SubController implements Initializable {
     } // end method initialize
 
     /**
-     *
-     * @return
+     * Generates a sequence with matched keywords.
+     * @return a map of sequential numbers with their corresponding keywords
      */
     public Map<Integer, String> generateSequence() {
         Map<Integer, String> sequence = new HashMap<>();
 
-        model.setDivisor1(divisor1TextField.getText());
-        model.setKeyword1(keyword1TextField.getText());
-        model.setDivisor2(divisor2TextField.getText());
-        model.setKeyword2(keyword2TextField.getText());
         String upperBound = inputTextField.getText();
         if (null != upperBound && !upperBound.isEmpty()) {
             sequence = model.computeOutput(Integer.valueOf(upperBound));
@@ -114,12 +140,12 @@ public class FizzBuzzController extends SubController implements Initializable {
     } // end method generateSequence
 
     /**
-     *
-     * @param sequence
-     * @return
+     * Substitutes the given sequence with keywords if the number matches one of the divisors.
+     * @param sequence a list of numbers
+     * @return a list of string with matched numbers replaced with keywords
      */
     public List<String> substituteWithKeywords(List<BigInteger> sequence) {
         return model.substituteWithKeywords(sequence);
     } // end method substituteWithKeywords
 
-} // end class FizzBuzz
+} // end class FizzBuzzController

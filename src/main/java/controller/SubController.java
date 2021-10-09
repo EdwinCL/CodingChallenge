@@ -3,7 +3,7 @@ package controller;
 import javafx.scene.control.ListView;
 
 /**
- * Base class for child controllers
+ * Base class for child controllers of the Coding Challenge app.
  */
 public class SubController {
 
@@ -12,16 +12,16 @@ public class SubController {
     protected ListView<String> outputListView;
 
     /**
-     *
-     * @param parentController
+     * Sets the parent controller.
+     * @param parentController the parent controller
      */
     public void setParentController(CodingChallengeController parentController) {
         this.parentController = parentController;
     } // end method setParentController
 
     /**
-     *
-     * @param outputListView
+     * Sets the list view for displaying generated sequence.
+     * @param outputListView the list view
      */
     public void setOutputListView(ListView<String> outputListView) {
         this.outputListView = outputListView;

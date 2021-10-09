@@ -34,7 +34,7 @@
                         <TextField fx:id="zTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label alignment="CENTER_RIGHT" minWidth="100.0" text="Enter x:" />
                         <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" fx:id="xTextField" />
-                        <Button fx:id="generateButton" minWidth="100.0" mnemonicParsing="false" text="Generate" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Button fx:id="generateButton" alignment="CENTER" minWidth="100.0" mnemonicParsing="false" text="Generate" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>

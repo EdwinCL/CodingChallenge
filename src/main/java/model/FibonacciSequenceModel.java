@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Model class for generating a customizable fibonacci sequence, F(x) = F(x - y) + F(x - z)
+ * Model class for generating a customizable fibonacci sequence, F(x) = F(x - y) + F(x - z).
  */
 public class FibonacciSequenceModel {
 
@@ -18,13 +18,18 @@ public class FibonacciSequenceModel {
 
     private final static Logger LOGGER = Logger.getLogger(FibonacciSequenceModel.class.getName());
 
-    public FibonacciSequenceModel() {
-    } // end constructor
-
+    /**
+     * Returns the y value in F(x) = F(x - y) + F(x - z).
+     * @return the y value
+     */
     public int getYValue() {
         return yValue;
     } // end method getYValue
 
+    /**
+     * Sets the y value in F(x) = F(x - y) + F(x - z). The default value, 1, will be used if the string is empty.
+     * @param yValue the y value
+     */
     public void setYValue(final String yValue) {
         if (yValue.isEmpty()) {
             this.yValue = Y_DEFAULT_VALUE;
@@ -37,10 +42,18 @@ public class FibonacciSequenceModel {
         } // end if
     } // end method setYValue
 
+    /**
+     * Returns the z value in F(x) = F(x - y) + F(x - z).
+     * @return the z value
+     */
     public int getZValue() {
         return zValue;
     } // end method getZValue
 
+    /**
+     * Sets the z value in F(x) = F(x - y) + F(x - z). The default value, 2, will be used if the string is empty.
+     * @param zValue the z value
+     */
     public void setZValue(final String zValue) {
         if (zValue.isEmpty()) {
             this.zValue = Z_DEFAULT_VALUE;
@@ -54,9 +67,9 @@ public class FibonacciSequenceModel {
     } // end method setZValue
 
     /**
-     * Generates fibonacci sequence
-     * @param xValue
-     * @return
+     * Generates a Fibonacci Sequence up to the given x value in F(x) = F(x - y) + F(x - z).
+     * @param xValue the x value
+     * @return the Fibonacci Sequence, or an empty list if x is invalid
      */
     public List<BigInteger> generateSequence(final int xValue) {
         List<BigInteger> sequence = new ArrayList<>();
@@ -68,9 +81,9 @@ public class FibonacciSequenceModel {
     } // end method generateSequence
 
     /**
-     *
-     * @param n
-     * @return
+     * Calculates a Fibonacci number, F(n)
+     * @param n the index
+     * @return the Fibonacci number
      */
     public long fibonacci(int n) {
         if (n == 0) return 0;

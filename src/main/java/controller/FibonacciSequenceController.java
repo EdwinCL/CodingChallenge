@@ -15,7 +15,7 @@ import javafx.scene.control.TextFormatter;
 import model.FibonacciSequenceModel;
 
 /**
- * Controller class for displaying a customizable fibonacci sequence, F(x) = F(x - y) + F(x - z)
+ * The controller class for displaying a customizable fibonacci sequence, F(x) = F(x - y) + F(x - z)
  */
 public class FibonacciSequenceController extends SubController implements Initializable {
 
@@ -52,6 +52,12 @@ public class FibonacciSequenceController extends SubController implements Initia
             } // end if
             return null;
         }));
+        yTextField.focusedProperty().addListener((observer, oldValue, newValue) -> {
+            // When the textfield lost focus, update the corresponding value in the model
+            if (!newValue) {
+                model.setYValue(yTextField.getText());
+            } // end if
+        });
         zTextField.setTextFormatter(new TextFormatter<>(change -> {
             String text = change.getText();
             if (text.matches(NON_NEGATIVE_INTEGER)) {
@@ -59,6 +65,12 @@ public class FibonacciSequenceController extends SubController implements Initia
             } // end if
             return null;
         }));
+        zTextField.focusedProperty().addListener((observer, oldValue, newValue) -> {
+            // When the textfield lost focus, update the corresponding value in the model
+            if (!newValue) {
+                model.setZValue(zTextField.getText());
+            } // end if
+        });
 
         // Initializes the y and z value
         yTextField.setText(String.valueOf(model.getYValue()));
@@ -78,8 +90,6 @@ public class FibonacciSequenceController extends SubController implements Initia
     public List<BigInteger> generateSequence() {
         List<BigInteger> sequence = new ArrayList<>();
 
-        model.setYValue(yTextField.getText());
-        model.setZValue(zTextField.getText());
         String xValue = xTextField.getText();
         if (null != xValue && !xValue.isEmpty()) {
             sequence = model.generateSequence(Integer.valueOf(xValue));
