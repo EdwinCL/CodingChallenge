@@ -103,4 +103,20 @@ public class FibonacciSequenceModelTest {
         assertEquals(8, output.get(5).intValue());
     } // end methodtestGenerateSequence
 
+    @Test
+    void testGenerateSequenceInvalidIndex() {
+        final int n = 6;
+        cut.setYValue(String.valueOf(10));
+        cut.setZValue(String.valueOf(13));
+
+        List<BigInteger> output = cut.generateSequence(n);
+
+        assertEquals(1, output.get(0).intValue());
+        assertEquals(1, output.get(1).intValue());
+        assertEquals(2, output.get(2).intValue());
+        assertEquals(2, output.get(3).intValue());
+        assertEquals(2, output.get(4).intValue());
+        assertEquals(2, output.get(5).intValue());
+    } // end testGenerateSequenceInvalidIndex
+
 } // end class FibonacciSequenceModelTest
