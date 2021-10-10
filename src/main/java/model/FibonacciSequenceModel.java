@@ -31,7 +31,7 @@ public class FibonacciSequenceModel {
      * @param yValue the y value
      */
     public void setYValue(final String yValue) {
-        if (yValue.isEmpty()) {
+        if (yValue == null || yValue.isEmpty()) {
             this.yValue = Y_DEFAULT_VALUE;
         } else {
             try {
@@ -55,7 +55,7 @@ public class FibonacciSequenceModel {
      * @param zValue the z value
      */
     public void setZValue(final String zValue) {
-        if (zValue.isEmpty()) {
+        if (zValue == null || zValue.isEmpty()) {
             this.zValue = Z_DEFAULT_VALUE;
         } else {
             try {

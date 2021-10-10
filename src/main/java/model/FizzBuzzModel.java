@@ -39,7 +39,7 @@ public class FizzBuzzModel {
      * @param divisor the divsior
      */
     public void setDivisor1(final String divisor) {
-        if (divisor.isEmpty()) {
+        if (divisor == null || divisor.isEmpty()) {
             divisor1 = DIVISOR_1_DEFAULT;
         } else {
             try {
@@ -63,7 +63,7 @@ public class FizzBuzzModel {
      * @param divisor
      */
     public void setDivisor2(final String divisor) {
-        if (divisor.isEmpty()) {
+        if (divisor == null || divisor.isEmpty()) {
             divisor2 = DIVISOR_2_DEFAULT;
         } else {
             try {
@@ -87,7 +87,7 @@ public class FizzBuzzModel {
      * @param keyword the keyword
      */
     public void setKeyword1(final String keyword) {
-        keyword1 = keyword.isEmpty() ? KEYWORD_1_DEFAULT : keyword;
+        keyword1 = (keyword == null || keyword.isEmpty()) ? KEYWORD_1_DEFAULT : keyword;
     } // end method setKeyword1
 
     /**
@@ -103,7 +103,7 @@ public class FizzBuzzModel {
      * @param keyword the keyword
      */
     public void setKeyword2(final String keyword) {
-        keyword2 = keyword.isEmpty() ? KEYWORD_2_DEFAULT : keyword;
+        keyword2 = (keyword == null || keyword.isEmpty()) ? KEYWORD_2_DEFAULT : keyword;
     } // end method setKeyword2
 
     /**
