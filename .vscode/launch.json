@@ -12,10 +12,10 @@
         },
         {
             "type": "java",
-            "name": "Launch HelloFX",
+            "name": "Launch Coding Challenge",
             "request": "launch",
-            "mainClass": "HelloFX",
-            "projectName": "HelloFX"
+            "mainClass": "CodingChallenge",
+            "projectName": "CodingChallenge"
         }
     ]
 }

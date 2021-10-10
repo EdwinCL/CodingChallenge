@@ -3,6 +3,7 @@ package model;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -83,12 +84,14 @@ public class FibonacciSequenceModel {
             try {
                 p1 = sequence.get(i - yValue - 1);
             } catch (Exception e) {
+                LOGGER.log(Level.FINE, "F(x - y) does not exist, uses 1 instead.");
             } // end try
 
             BigInteger p2 = BigInteger.valueOf(1);
             try {
                 p2 = sequence.get(i - zValue - 1);
             } catch (Exception e) {
+                LOGGER.log(Level.FINE, "F(x - y) does not exist, uses 1 instead.");
             } // end try
 
             sequence.add(p1.add(p2));
