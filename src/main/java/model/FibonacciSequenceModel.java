@@ -73,22 +73,27 @@ public class FibonacciSequenceModel {
      */
     public List<BigInteger> generateSequence(final int xValue) {
         List<BigInteger> sequence = new ArrayList<>();
-        // TODO: need a more efficient way to generate the fibonacci sequence
         for (int i = 1; i <= xValue; i++) {
-            sequence.add(BigInteger.valueOf(fibonacci(i)));
+            if (i == 1 || i == 2) {
+                sequence.add(BigInteger.valueOf(1));
+                continue;
+            } // end if
+
+            BigInteger p1 = BigInteger.valueOf(1);
+            try {
+                p1 = sequence.get(i - yValue - 1);
+            } catch (Exception e) {
+            } // end try
+
+            BigInteger p2 = BigInteger.valueOf(1);
+            try {
+                p2 = sequence.get(i - zValue - 1);
+            } catch (Exception e) {
+            } // end try
+
+            sequence.add(p1.add(p2));
         } // end for
         return sequence;
     } // end method generateSequence
-
-    /**
-     * Calculates a Fibonacci number, F(n)
-     * @param n the index
-     * @return the Fibonacci number
-     */
-    public long fibonacci(int n) {
-        if (n == 0) return 0;
-        if (n == 1 || n == 2 || n < 0) return 1;
-        return fibonacci(n - yValue) + fibonacci(n - zValue);
-    } // end method fibonacci
 
 } // end class FibonacciSequenceModel

@@ -199,9 +199,9 @@ public class FizzBuzzModelTest {
 
     @Test
     void testSubstituteWithKeywords() {
-        List<BigInteger> sequence = Arrays.asList(new BigInteger("1"),
-            new BigInteger("2"), new BigInteger("3"), new BigInteger("4"),
-            new BigInteger("5"));
+        List<BigInteger> sequence = Arrays.asList(BigInteger.valueOf(1),
+            BigInteger.valueOf(2), BigInteger.valueOf(3),
+            BigInteger.valueOf(4), BigInteger.valueOf(5));
 
         List<String> output = cut.substituteWithKeywords(sequence);
 

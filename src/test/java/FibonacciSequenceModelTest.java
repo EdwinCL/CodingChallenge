@@ -90,41 +90,6 @@ public class FibonacciSequenceModelTest {
     } // end method testSetZValueInvalid
 
     @Test
-    void testFibonacci() {
-        final int n = 6;
-
-        assertEquals(8, cut.fibonacci(n));
-    } // end method testFibonacci
-
-    @Test
-    void testFibonacci0() {
-        final int n = 0;
-
-        assertEquals(0, cut.fibonacci(n));
-    } // end method testFibonacci0
-
-    @Test
-    void testFibonacci1() {
-        final int n = 1;
-
-        assertEquals(1, cut.fibonacci(n));
-    } // end method testFibonacci1
-
-    @Test
-    void testFibonacci2() {
-        final int n = 2;
-
-        assertEquals(1, cut.fibonacci(n));
-    } // end method testFibonacci2
-
-    @Test
-    void testFibonacciNegative() {
-        final int n = -1;
-
-        assertEquals(1, cut.fibonacci(n));
-    } // end method testFibonacciNegative
-
-    @Test
     void testGenerateSequence() {
         final int n = 6;
 
