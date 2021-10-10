@@ -1,5 +1,7 @@
 # Coding Challenge
 
+<img width="812" alt="screenshot" src="https://user-images.githubusercontent.com/4177721/136707201-89844677-bbb2-4d56-bc74-05c77de25154.png">
+
 ## 1. Fizz Buzz
 
 - Input: an integer
